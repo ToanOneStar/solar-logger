@@ -1,0 +1,36 @@
+{
+  "model": "GOODWE_GW20K_ET_L_G10",
+  "endianness": "big",
+  "tags": [
+    { "tag": "dc_voltage_pv1", "func": 3, "addr": 550, "len": 1, "type": "u16", "scale": 0.1, "unit": "V" },
+    { "tag": "dc_voltage_pv2", "func": 3, "addr": 551, "len": 1, "type": "u16", "scale": 0.1, "unit": "V" },
+
+    { "tag": "dc_current_pv1", "func": 3, "addr": 552, "len": 1, "type": "u16", "scale": 0.1, "unit": "A" },
+    { "tag": "dc_current_pv2", "func": 3, "addr": 553, "len": 1, "type": "u16", "scale": 0.1, "unit": "A" },
+
+    { "tag": "ac_voltage_l1", "func": 3, "addr": 554, "len": 1, "type": "u16", "scale": 0.1, "unit": "V" },
+    { "tag": "ac_voltage_l2", "func": 3, "addr": 555, "len": 1, "type": "u16", "scale": 0.1, "unit": "V" },
+    { "tag": "ac_voltage_l3", "func": 3, "addr": 556, "len": 1, "type": "u16", "scale": 0.1, "unit": "V" },
+
+    { "tag": "ac_current_l1", "func": 3, "addr": 557, "len": 1, "type": "u16", "scale": 0.1, "unit": "A" },
+    { "tag": "ac_current_l2", "func": 3, "addr": 558, "len": 1, "type": "u16", "scale": 0.1, "unit": "A" },
+    { "tag": "ac_current_l3", "func": 3, "addr": 559, "len": 1, "type": "u16", "scale": 0.1, "unit": "A" },
+
+    { "tag": "ac_frequency", "func": 3, "addr": 560, "len": 1, "type": "u16", "scale": 0.01, "unit": "Hz" },
+
+    { "tag": "active_power", "func": 3, "addr": 563, "len": 1, "type": "i16", "scale": 1, "unit": "W" },
+
+    { "tag": "temperature_internal", "func": 3, "addr": 565, "len": 1, "type": "i16", "scale": 0.1, "unit": "C" },
+
+    { "tag": "error_code_high", "func": 3, "addr": 784, "len": 1, "type": "u16", "scale": 1 },
+    { "tag": "error_code_low", "func": 3, "addr": 785, "len": 1, "type": "u16", "scale": 1 },
+    { "tag": "warning_code", "func": 3, "addr": 791, "len": 1, "type": "u16", "scale": 1 },
+
+    { "tag": "rtc_year_month", "func": 3, "addr": 16, "len": 1, "type": "u16", "scale": 1, "format": "MSB=year(2000+),LSB=month" },
+    { "tag": "rtc_day_hour", "func": 3, "addr": 17, "len": 1, "type": "u16", "scale": 1, "format": "MSB=day,LSB=hour" },
+    { "tag": "rtc_minute_second", "func": 3, "addr": 18, "len": 1, "type": "u16", "scale": 1, "format": "MSB=minute,LSB=second" },
+
+    { "tag": "reconnect_time", "func": 3, "addr": 1, "len": 1, "type": "u16", "scale": 1, "unit": "s" }
+  ],
+  "poll_interval_sec": 2
+}

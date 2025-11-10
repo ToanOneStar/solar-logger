@@ -1,36 +1,348 @@
 {
-  "model": "GOODWE_GW20K_ET_L_G10",
-  "endianness": "big",
-  "tags": [
-    { "tag": "dc_voltage_pv1", "func": 3, "addr": 550, "len": 1, "type": "u16", "scale": 0.1, "unit": "V" },
-    { "tag": "dc_voltage_pv2", "func": 3, "addr": 551, "len": 1, "type": "u16", "scale": 0.1, "unit": "V" },
-
-    { "tag": "dc_current_pv1", "func": 3, "addr": 552, "len": 1, "type": "u16", "scale": 0.1, "unit": "A" },
-    { "tag": "dc_current_pv2", "func": 3, "addr": 553, "len": 1, "type": "u16", "scale": 0.1, "unit": "A" },
-
-    { "tag": "ac_voltage_l1", "func": 3, "addr": 554, "len": 1, "type": "u16", "scale": 0.1, "unit": "V" },
-    { "tag": "ac_voltage_l2", "func": 3, "addr": 555, "len": 1, "type": "u16", "scale": 0.1, "unit": "V" },
-    { "tag": "ac_voltage_l3", "func": 3, "addr": 556, "len": 1, "type": "u16", "scale": 0.1, "unit": "V" },
-
-    { "tag": "ac_current_l1", "func": 3, "addr": 557, "len": 1, "type": "u16", "scale": 0.1, "unit": "A" },
-    { "tag": "ac_current_l2", "func": 3, "addr": 558, "len": 1, "type": "u16", "scale": 0.1, "unit": "A" },
-    { "tag": "ac_current_l3", "func": 3, "addr": 559, "len": 1, "type": "u16", "scale": 0.1, "unit": "A" },
-
-    { "tag": "ac_frequency", "func": 3, "addr": 560, "len": 1, "type": "u16", "scale": 0.01, "unit": "Hz" },
-
-    { "tag": "active_power", "func": 3, "addr": 563, "len": 1, "type": "i16", "scale": 1, "unit": "W" },
-
-    { "tag": "temperature_internal", "func": 3, "addr": 565, "len": 1, "type": "i16", "scale": 0.1, "unit": "C" },
-
-    { "tag": "error_code_high", "func": 3, "addr": 784, "len": 1, "type": "u16", "scale": 1 },
-    { "tag": "error_code_low", "func": 3, "addr": 785, "len": 1, "type": "u16", "scale": 1 },
-    { "tag": "warning_code", "func": 3, "addr": 791, "len": 1, "type": "u16", "scale": 1 },
-
-    { "tag": "rtc_year_month", "func": 3, "addr": 16, "len": 1, "type": "u16", "scale": 1, "format": "MSB=year(2000+),LSB=month" },
-    { "tag": "rtc_day_hour", "func": 3, "addr": 17, "len": 1, "type": "u16", "scale": 1, "format": "MSB=day,LSB=hour" },
-    { "tag": "rtc_minute_second", "func": 3, "addr": 18, "len": 1, "type": "u16", "scale": 1, "format": "MSB=minute,LSB=second" },
-
-    { "tag": "reconnect_time", "func": 3, "addr": 1, "len": 1, "type": "u16", "scale": 1, "unit": "s" }
-  ],
-  "poll_interval_sec": 2
+  "model": "INVERTER_MODEL_NAME",
+  "manufacturer": "MANUFACTURER_NAME",
+  "version": "1.0.0",
+  "communication": {
+    "protocol": "modbus_rtu",
+    "endianness": "big",
+    "default_unit_id": 1,
+    "baud_rate": 9600,
+    "poll_interval_sec": 3
+  },
+  "register_groups": {
+    "initialization": {
+      "description": "Dữ liệu khởi tạo",
+      "function_code": 3,
+      "writable": true,
+      "tags": [
+        {
+          "tag": "device_address",
+          "addr": 45127,
+          "len": 1,
+          "type": "u16",
+          "scale": 1,
+          "unit": null,
+          "access": "rw",
+          "range": {
+            "min": 0,
+            "max": 247
+          },
+          "description": "Địa chỉ thiết bị"
+        },
+        {
+          "tag": "rtc_year_month",
+          "addr": 45200,
+          "len": 1,
+          "type": "u16",
+          "scale": 1,
+          "unit": null,
+          "access": "rw",
+          "format": "HByte: year (13-99), LByte: month (1-12)",
+          "description": "Cài đặt năm và tháng RTC"
+        },
+        {
+          "tag": "rtc_day_hour",
+          "addr": 45201,
+          "len": 1,
+          "type": "u16",
+          "scale": 1,
+          "unit": null,
+          "access": "rw",
+          "format": "HByte: day (1-31), LByte: hour (0-23)",
+          "description": "Cài đặt ngày và giờ RTC"
+        },
+        {
+          "tag": "rtc_minute_second",
+          "addr": 45202,
+          "len": 1,
+          "type": "u16",
+          "scale": 1,
+          "unit": null,
+          "access": "rw",
+          "format": "HByte: minute (0-59), LByte: second (0-59)",
+          "description": "Cài đặt phút và giây RTC"
+        }
+      ]
+    },
+    "runtime_data": {
+      "description": "Dữ liệu vận hành tức thời",
+      "function_code": 4,
+      "writable": false,
+      "tags": [
+        {
+          "tag": "work_mode",
+          "addr": 35187,
+          "len": 1,
+          "type": "u16",
+          "scale": 1,
+          "unit": null,
+          "access": "ro",
+          "description": "Chế độ làm việc",
+          "enum": "work_modes"
+        },
+        {
+          "tag": "error_message",
+          "addr": 35189,
+          "len": 2,
+          "type": "u32",
+          "scale": 1,
+          "unit": null,
+          "access": "ro",
+          "description": "Mã lỗi 32-bit",
+          "reference": "Error Table 8-2"
+        },
+        {
+          "tag": "warning_code",
+          "addr": 35185,
+          "len": 1,
+          "type": "u16",
+          "scale": 1,
+          "unit": null,
+          "access": "ro",
+          "description": "Mã cảnh báo"
+        },
+        {
+          "tag": "inverter_temp",
+          "addr": 35174,
+          "len": 1,
+          "type": "s16",
+          "scale": 0.1,
+          "unit": "C",
+          "access": "ro",
+          "description": "Nhiệt độ bên trong inverter"
+        },
+        {
+          "tag": "pv_total_power",
+          "addr": 35301,
+          "len": 2,
+          "type": "u32",
+          "scale": 1,
+          "unit": "W",
+          "access": "ro",
+          "description": "Tổng công suất PV tức thời (tất cả MPPTs)"
+        },
+        {
+          "tag": "total_inv_power",
+          "addr": 35137,
+          "len": 2,
+          "type": "s32",
+          "scale": 1,
+          "unit": "W",
+          "access": "ro",
+          "description": "Tổng công suất biến tần (AC output power)"
+        },
+        {
+          "tag": "ac_active_power",
+          "addr": 35139,
+          "len": 2,
+          "type": "s32",
+          "scale": 1,
+          "unit": "W",
+          "access": "ro",
+          "description": "Tổng công suất AC hoạt động (từ Meter/Inv)"
+        }
+      ]
+    },
+    "battery_data": {
+      "description": "Dữ liệu Pin (Battery Data)",
+      "function_code": 4,
+      "writable": false,
+      "tags": [
+        {
+          "tag": "battery_voltage",
+          "addr": 35180,
+          "len": 1,
+          "type": "u16",
+          "scale": 0.1,
+          "unit": "V",
+          "access": "ro",
+          "description": "Điện áp pin (từ BMS)"
+        },
+        {
+          "tag": "battery_current",
+          "addr": 35181,
+          "len": 1,
+          "type": "s16",
+          "scale": 0.1,
+          "unit": "A",
+          "access": "ro",
+          "description": "Dòng pin (Sạc dương/Xả âm)"
+        },
+        {
+          "tag": "battery_power",
+          "addr": 35182,
+          "len": 2,
+          "type": "u32",
+          "scale": 1,
+          "unit": "W",
+          "access": "ro",
+          "description": "Công suất pin"
+        },
+        {
+          "tag": "battery_mode",
+          "addr": 35184,
+          "len": 1,
+          "type": "u16",
+          "scale": 1,
+          "unit": null,
+          "access": "ro",
+          "description": "Chế độ pin",
+          "enum": "battery_modes"
+        },
+        {
+          "tag": "battery_soc",
+          "addr": 37007,
+          "len": 1,
+          "type": "u16",
+          "scale": 1,
+          "unit": "%",
+          "access": "ro",
+          "description": "Phần trăm dung lượng pin còn lại"
+        }
+      ]
+    },
+    "energy_accumulation": {
+      "description": "Dữ liệu Năng lượng Tích lũy",
+      "function_code": 4,
+      "writable": false,
+      "tags": [
+        {
+          "tag": "pv_energy_today",
+          "addr": 35193,
+          "len": 2,
+          "type": "u32",
+          "scale": 0.01,
+          "unit": "kWh",
+          "access": "ro",
+          "description": "Tổng sản lượng PV trong ngày"
+        },
+        {
+          "tag": "energy_sell_total",
+          "addr": 45226,
+          "len": 2,
+          "type": "u32",
+          "scale": 0.01,
+          "unit": "kWh",
+          "access": "rw",
+          "description": "Tổng năng lượng xuất lưới trọn đời"
+        },
+        {
+          "tag": "energy_sell_today",
+          "addr": 35199,
+          "len": 1,
+          "type": "u16",
+          "scale": 0.01,
+          "unit": "kWh",
+          "access": "ro",
+          "description": "Năng lượng xuất lưới trong ngày"
+        },
+        {
+          "tag": "energy_charge_today",
+          "addr": 35208,
+          "len": 1,
+          "type": "u16",
+          "scale": 0.01,
+          "unit": "kWh",
+          "access": "ro",
+          "description": "Năng lượng sạc pin trong ngày (không từ BMS)"
+        },
+        {
+          "tag": "energy_discharge_today",
+          "addr": 35211,
+          "len": 1,
+          "type": "u16",
+          "scale": 0.01,
+          "unit": "kWh",
+          "access": "ro",
+          "description": "Năng lượng xả pin trong ngày (không từ BMS)"
+        }
+      ]
+    },
+    "energy_consumption": {
+      "description": "Dữ liệu năng lượng tải tiêu thụ",
+      "function_code": 3,
+      "writable": true,
+      "tags": [
+        {
+          "tag": "energy_load_total",
+          "addr": 45234,
+          "len": 2,
+          "type": "u32",
+          "scale": 0.01,
+          "unit": "kWh",
+          "access": "rw",
+          "description": "Tổng năng lượng tải tiêu thụ từ lúc setting date"
+        },
+        {
+          "tag": "energy_load_today",
+          "addr": 45236,
+          "len": 1,
+          "type": "u16",
+          "scale": 0.01,
+          "unit": "kWh",
+          "access": "rw",
+          "description": "Năng lượng tải tiêu thụ trong ngày"
+        }
+      ]
+    },
+    "time_data": {
+      "description": "Dữ liệu thời gian (Read-Only)",
+      "function_code": 4,
+      "writable": false,
+      "tags": [
+        {
+          "tag": "rtc_year_month_ro",
+          "addr": 35100,
+          "len": 1,
+          "type": "u16",
+          "scale": 1,
+          "unit": null,
+          "access": "ro",
+          "format": "HByte: year (13-99, 13=2013), LByte: month (1-12)",
+          "description": "Đọc năm và tháng RTC"
+        },
+        {
+          "tag": "rtc_day_hour_ro",
+          "addr": 35101,
+          "len": 1,
+          "type": "u16",
+          "scale": 1,
+          "unit": null,
+          "access": "ro",
+          "format": "HByte: day (1-31), LByte: hour (0-23)",
+          "description": "Đọc ngày và giờ RTC"
+        },
+        {
+          "tag": "rtc_minute_second_ro",
+          "addr": 35102,
+          "len": 1,
+          "type": "u16",
+          "scale": 1,
+          "unit": null,
+          "access": "ro",
+          "format": "HByte: minute (0-59), LByte: second (0-59)",
+          "description": "Đọc phút và giây RTC"
+        }
+      ]
+    }
+  },
+  "enums": {
+    "work_modes": {
+      "description": "Các chế độ làm việc của inverter",
+      "values": {
+        "0": "Standby",
+        "1": "Grid-tied",
+        "2": "Off-grid",
+        "3": "Fault",
+        "4": "Flash update"
+      }
+    },
+    "battery_modes": {
+      "description": "Các chế độ hoạt động của pin",
+      "values": {
+        "0x02": "Discharging",
+        "0x03": "Charging"
+      }
+    }
+  }
 }

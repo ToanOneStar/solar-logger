@@ -1,0 +1,20 @@
+{
+  "plant_id": "PQ-HOTEL",
+  "buses": [
+    {
+      "id": "rs485-1",
+      "type": "modbus_rtu",
+      "baudrate": 9600,
+      "devices": [
+        {
+          "id": "INV_001",
+          "vendor": "GoodWe",
+          "model": "GW20K-ET-L-G10",
+          "type": "inverter",
+          "profile": "profiles/goodwe_GW20K-ET-L-G10_v1_0_0.json",
+          "location": "Roof-East"
+        }
+      ]
+    }
+  ]
+}

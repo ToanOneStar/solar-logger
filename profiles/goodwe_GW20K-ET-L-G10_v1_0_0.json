@@ -1,17 +1,11 @@
 {
-  "model": "GW20K-ET-L-G10",
-  "manufacturer": "GoodWe",
-  "version": "1.0.0",
-  "communication": {
-    "protocol": "modbus_rtu",
-    "endianness": "big",
-    "unit_id_default": 1,
-    "device_address_default": 247,
-    "baud_rate_default": 9600
+   "communication": {
+    "endianness": "msb",
+    "address": 247,
+    "baudrate": 9600
   },
   "register_groups": {
     "initialization": {
-      "description": "Init data",
       "function_code": 6,
       "writable": true,
       "tags": [
@@ -26,8 +20,7 @@
           "range": {
             "min": 0,
             "max": 247
-          },
-          "description": "Setting Device Address"
+          }
         },
         {
           "tag": "rtc_year_month",
@@ -36,9 +29,7 @@
           "type": "u16",
           "scale": 1,
           "unit": null,
-          "access": "rw",
-          "format": "HByte: year (13-99), LByte: month (1-12)",
-          "description": "Setting Year and Month RTC"
+          "access": "rw"
         },
         {
           "tag": "rtc_day_hour",
@@ -47,9 +38,7 @@
           "type": "u16",
           "scale": 1,
           "unit": null,
-          "access": "rw",
-          "format": "HByte: day (1-31), LByte: hour (0-23)",
-          "description": "Setting Day and Hour RTC"
+          "access": "rw"
         },
         {
           "tag": "rtc_minute_second",
@@ -58,14 +47,11 @@
           "type": "u16",
           "scale": 1,
           "unit": null,
-          "access": "rw",
-          "format": "HByte: minute (0-59), LByte: second (0-59)",
-          "description": "Setting Minute and Second RTC"
+          "access": "rw"
         }
       ]
     },
     "runtime_data": {
-      "description": "Inveter Running Data",
       "function_code": 4,
       "writable": false,
       "tags": [
@@ -77,7 +63,6 @@
           "scale": 1,
           "unit": null,
           "access": "ro",
-          "description": "Working Mode",
           "enum": "work_modes"
         },
         {
@@ -88,8 +73,17 @@
           "scale": 1,
           "unit": null,
           "access": "ro",
-          "description": "Mã lỗi 32-bit",
-          "reference": "Error Table 8-2"
+          "enum": "error_codes"
+        },
+        {
+          "tag": "grid_mode",
+          "addr": 35136,
+          "len": 1,
+          "type": "u16",
+          "scale": 1,
+          "unit": null,
+          "access": "ro",
+          "enum": "grid_modes"
         },
         {
           "tag": "warning_code",
@@ -98,8 +92,7 @@
           "type": "u16",
           "scale": 1,
           "unit": null,
-          "access": "ro",
-          "description": "Warning Code"
+          "access": "ro"
         },
         {
           "tag": "inverter_temp",
@@ -108,8 +101,7 @@
           "type": "s16",
           "scale": 10,
           "unit": "C",
-          "access": "ro",
-          "description": "Inverter Temperature"
+          "access": "ro"
         },
         {
           "tag": "pv_total_power",
@@ -118,8 +110,7 @@
           "type": "u32",
           "scale": 1,
           "unit": "W",
-          "access": "ro",
-          "description": "Total PV power (all MPPTs)"
+          "access": "ro"
         },
         {
           "tag": "total_inv_power",
@@ -128,8 +119,7 @@
           "type": "s32",
           "scale": 1,
           "unit": "W",
-          "access": "ro",
-          "description": "Total Inverter Power (AC output power)"
+          "access": "ro"
         },
         {
           "tag": "ac_active_power",
@@ -138,13 +128,11 @@
           "type": "s32",
           "scale": 1,
           "unit": "W",
-          "access": "ro",
-          "description": "Total Active Power Of Inverter. (If meter connection ok, it is meter power.If meter connection fail, it is inverter on-grid port pow"
+          "access": "ro"
         }
       ]
     },
     "battery_data": {
-      "description": "Battery Data",
       "function_code": 4,
       "writable": false,
       "tags": [
@@ -155,8 +143,7 @@
           "type": "u16",
           "scale": 10,
           "unit": "V",
-          "access": "ro",
-          "description": "First group battery voltage. If BMS communication successfully, it is the voltage BMS send to"
+          "access": "ro"
         },
         {
           "tag": "battery_current",
@@ -165,8 +152,7 @@
           "type": "s16",
           "scale": 10,
           "unit": "A",
-          "access": "ro",
-          "description": "Battery Current (Charge + / Discharge -)"
+          "access": "ro"
         },
         {
           "tag": "battery_power",
@@ -175,8 +161,7 @@
           "type": "u32",
           "scale": 1,
           "unit": "W",
-          "access": "ro",
-          "description": "Battery Power"
+          "access": "ro"
         },
         {
           "tag": "battery_mode",
@@ -185,9 +170,7 @@
           "type": "u16",
           "scale": 1,
           "unit": null,
-          "access": "ro",
-          "description": "Battery Mode",
-          "enum": "battery_modes"
+          "access": "ro"
         },
         {
           "tag": "battery_soc",
@@ -196,13 +179,11 @@
           "type": "u16",
           "scale": 1,
           "unit": "%",
-          "access": "ro",
-          "description": "Battery Capacity"
+          "access": "ro"
         }
       ]
     },
     "energy_accumulation": {
-      "description": "Energy Accumulation Data",
       "function_code": 4,
       "writable": false,
       "tags": [
@@ -213,8 +194,7 @@
           "type": "u32",
           "scale": 10,
           "unit": "kWh",
-          "access": "ro",
-          "description": "Total PV productdioanteenergy of the day"
+          "access": "ro"
         },
         {
           "tag": "energy_sell_total",
@@ -223,8 +203,7 @@
           "type": "u32",
           "scale": 10,
           "unit": "kWh",
-          "access": "rw",
-          "description": "The accumulated exporting energy to grid from the installation data"
+          "access": "rw"
         },
         {
           "tag": "energy_sell_today",
@@ -233,8 +212,7 @@
           "type": "u16",
           "scale": 10,
           "unit": "kWh",
-          "access": "ro",
-          "description": "The accumulated exporting energy to grid"
+          "access": "ro"
         },
         {
           "tag": "energy_charge_today",
@@ -243,8 +221,7 @@
           "type": "u16",
           "scale": 10,
           "unit": "kWh",
-          "access": "ro",
-          "description": "The accumulated energy charged to battery of the day Not from BMS"
+          "access": "ro"
         },
         {
           "tag": "energy_discharge_today",
@@ -253,13 +230,11 @@
           "type": "u16",
           "scale": 10,
           "unit": "kWh",
-          "access": "ro",
-          "description": "The accumulated energy battery discharged, of the day Not from BMS"
+          "access": "ro"
         }
       ]
     },
     "energy_consumption": {
-      "description": "Load Energy Consumption Data",
       "function_code": 3,
       "writable": true,
       "tags": [
@@ -270,8 +245,7 @@
           "type": "u32",
           "scale": 10,
           "unit": "kWh",
-          "access": "rw",
-          "description": "The accumulated load consumption energy from the installation date, not include backup load."
+          "access": "rw"
         },
         {
           "tag": "energy_load_today",
@@ -280,13 +254,11 @@
           "type": "u16",
           "scale": 10,
           "unit": "kWh",
-          "access": "rw",
-          "description": "The accumulated load consumption energy of the day Not include backup load"
+          "access": "rw"
         }
       ]
     },
     "time_data": {
-      "description": "Time Data",
       "function_code": 4,
       "writable": false,
       "tags": [
@@ -297,9 +269,7 @@
           "type": "u16",
           "scale": 1,
           "unit": null,
-          "access": "ro",
-          "format": "HByte: year (13-99, 13=2013), LByte: month (1-12)",
-          "description": "Read year and month"
+          "access": "ro"
         },
         {
           "tag": "rtc_day_hour_ro",
@@ -308,9 +278,7 @@
           "type": "u16",
           "scale": 1,
           "unit": null,
-          "access": "ro",
-          "format": "HByte: day (1-31), LByte: hour (0-23)",
-          "description": "Read day and hour"
+          "access": "ro"
         },
         {
           "tag": "rtc_minute_second_ro",
@@ -319,16 +287,13 @@
           "type": "u16",
           "scale": 1,
           "unit": null,
-          "access": "ro",
-          "format": "HByte: minute (0-59), LByte: second (0-59)",
-          "description": "Read minute and second"
+          "access": "ro"
         }
       ]
     }
   },
   "enums": {
     "work_modes": {
-      "description": "Các chế độ làm việc của inverter",
       "values": {
         "0": "Wait",
         "1": "On-Grid",
@@ -339,12 +304,54 @@
       }
     },
     "battery_modes": {
-      "description": "Các chế độ hoạt động của pin",
       "values": {
         "0": "No Battery, or battery disconnected",
         "1": "Standby, no discharging or charging",
         "2": "Discharging",
         "3": "Charging"
+      }
+    },
+    "error_codes": {
+      "values": {
+        "0": "The GFCI detecting circuit is abnormal",
+        "1": "The output current sensor is abnormal",
+        "2": "Not assigned",
+        "3": "Different DCI value on Master and Slave",
+        "4": "Different GFCI values on Master and Slave",
+        "5": "Not assigned",
+        "6": "GFCI check failure 3 times",
+        "7": "Relay check failure 3 times",
+        "8": "AC HCT check failure 3 times",
+        "9": "Utility is unavailable",
+        "10": "Ground current is too high",
+        "11": "DC bus is too high",
+        "12": "The fan in case failure",
+        "13": "Temperature is too high",
+        "14": "Utility Phase Failure",
+        "15": "PV input voltage is over the tolerable maximum value",
+        "16": "The external fan failure",
+        "17": "Grid voltage out of tolerable range",
+        "18": "Isolation resistance of PV-plant too low",
+        "19": "The DC injection to grid is too high",
+        "20": "Backup output overload",
+        "21": "Not assigned",
+        "22": "Different value between Master and Slave for grid frequency",
+        "23": "Different value between Master and Slave for grid voltage",
+        "24": "Not assigned",
+        "25": "Relay check is failure",
+        "26": "Not assigned",
+        "27": "Phase angle out of range (110°–140°)",
+        "28": "Communication between ARM and DSP is failure",
+        "29": "The grid frequency is out of tolerable range",
+        "30": "EEPROM cannot be read or written",
+        "31": "Communication between microcontrollers is failure"
+      }
+    },
+    "grid_modes": {
+      "values": {
+        "0": "Loss, inverter disconnects to Grid",
+        "1": "OK, inverter connects to Grid",
+        "2": "Fault, something is wrong"
       }
     }
   }

@@ -1,0 +1,570 @@
+{
+   "communication": {
+    "endianness": "msb",
+    "mb_slave_addr": 247,
+    "baudrate": 9600
+  },
+  "register_groups": {
+    "initialization": {
+      "function_code": 6,
+      "writable": true,
+      "cids": [
+        {
+          "cid": "device_address",
+          "param_key": null,
+          "mb_reg_start": 45127,
+          "mb_size": 1,
+          "mb_param_type": "HOLDING",
+          "param_offset": 0,
+          "param_type": "u16",
+          "param_size": 2,
+          "param_units": null,
+          "access": "rw",
+          "range": {
+            "min": 0,
+            "max": 247,
+            "scale": 1
+          }
+        },
+        {
+          "cid": "rtc_year_month",
+          "param_key": null,
+          "mb_reg_start": 45200,
+          "mb_size": 1,
+          "mb_param_type": "HOLDING",
+          "param_offset": 0,
+          "param_type": "u16",
+          "param_size": 2,
+          "param_units": null,
+          "access": "rw",
+          "range": {
+            "min":-1,
+            "max": 65535,
+            "scale": 1
+          }
+        },
+        {
+          "cid": "rtc_day_hour",
+          "param_key": null,
+          "mb_reg_start": 45201,
+          "mb_size": 1,
+          "mb_param_type": "HOLDING",
+          "param_offset": 0,
+          "param_type": "u16",
+          "param_size": 2,
+          "param_units": null,
+          "access": "rw",
+          "range": {
+            "min":-1,
+            "max": 65535,
+            "scale": 1
+          }
+        },
+        {
+          "cid": "rtc_minute_second",
+          "param_key": null,
+          "mb_reg_start": 45202,
+          "mb_size": 1,
+          "mb_param_type": "HOLDING",
+          "param_offset": 0,
+          "param_type": "u16",
+          "param_size": 2,
+          "param_units": null,
+          "access": "rw",
+          "range": {
+            "min":-1,
+            "max": 65535,
+            "scale": 1
+          }
+        }
+      ]
+    },
+    "runtime_data": {
+      "function_code": 4,
+      "writable": false,
+      "cids": [
+        {
+          "cid": "work_mode",
+          "param_key": null,
+          "mb_reg_start": 35187,
+          "mb_size": 1,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "u16",
+          "param_size": 2,
+          "param_units": null,
+          "access": "ro",
+          "range": {
+            "min":-1,
+            "max": 65535,
+            "scale": 1
+          },
+          "enum": "work_modes"
+        },
+        {
+          "cid": "error_message",
+          "param_key": null,
+          "mb_reg_start": 35189,
+          "mb_size": 2,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "u32",
+          "param_size": 4,
+          "param_units": null,
+          "access": "ro",
+          "range": {
+            "min":-1,
+            "max": 4294967295, 
+            "scale": 1
+          },
+          "enum": "error_codes"
+        },
+        {
+          "cid": "grid_mode",
+          "param_key": null,
+          "mb_reg_start": 35136,
+          "mb_size": 1,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "u16",
+          "param_size": 2,
+          "param_units": null,
+          "access": "ro",
+          "range": {
+            "min":-1,
+            "max": 65535, 
+            "scale": 1
+          },
+          "enum": "grid_modes"
+        },
+        {
+          "cid": "warning_code",
+          "param_key": null,
+          "mb_reg_start": 35185,
+          "mb_size": 1,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "u16",
+          "param_size": 2,
+          "param_units": null,
+          "access": "ro",
+          "range": {
+            "min":-1,
+            "max": 65535, 
+            "scale": 1
+          }
+        },
+        {
+          "cid": "inverter_temp",
+          "param_key": null,
+          "mb_reg_start": 35174,
+          "mb_size": 1,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "s16",
+          "param_size": 2,
+          "param_units": "C",
+          "access": "ro",
+          "range": {
+            "min":-1,
+            "max": 65535, 
+            "scale": 0.1
+          }
+        },
+        {
+          "cid": "pv_total_power",
+          "param_key": null,
+          "mb_reg_start": 35301,
+          "mb_size": 2,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "u32",
+          "param_size": 4,
+          "param_units": "W",
+          "access": "ro",
+          "range": {
+            "min":-1,
+            "max": 4294967295, 
+            "scale": 1
+          }
+        },
+        {
+          "cid": "total_inv_power",
+          "param_key": null,
+          "mb_reg_start": 35137,
+          "mb_size": 2,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "s32",
+          "param_size": 4,
+          "param_units": "W",
+          "access": "ro",
+          "range": {
+            "min":-2147483648,
+            "max": 2147483648, 
+            "scale": 1
+          }
+        },
+        {
+          "cid": "ac_active_power",
+          "param_key": null,
+          "mb_reg_start": 35139,
+          "mb_size": 2,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "s32",
+          "param_size": 4,
+          "param_units": "W",
+          "access": "ro",
+          "range": {
+            "min":-2147483648,
+            "max": 2147483648, 
+            "scale": 1
+          }
+        }
+      ]
+    },
+    "battery_data": {
+      "function_code": 4,
+      "writable": false,
+      "cids": [
+        {
+          "cid": "battery_voltage",
+          "param_key": null,
+          "mb_reg_start": 35180,
+          "mb_size": 1,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "u16",
+          "param_size": 2,
+          "param_units": "V",
+          "access": "ro",
+          "range": {
+            "min":-1,
+            "max": 65535, 
+            "scale": 0.1
+          }
+        },
+        {
+          "cid": "battery_current",
+          "param_key": null,
+          "mb_reg_start": 35181,
+          "mb_size": 1,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "s16",
+          "param_size": 2,
+          "param_units": "A",
+          "access": "ro",
+          "range": {
+            "min":-65535,
+            "max": 65535, 
+            "scale": 0.1
+          }
+        },
+        {
+          "cid": "battery_power",
+          "param_key": null,
+          "mb_reg_start": 35182,
+          "mb_size": 2,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "u32",
+          "param_size": 4,
+          "param_units": "W",
+          "access": "ro",
+          "range": {
+            "min":-1,
+            "max": 4294967295, 
+            "scale": 1
+          }
+        },
+        {
+          "cid": "battery_mode",
+          "param_key": null,
+          "mb_reg_start": 35184,
+          "mb_size": 1,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "u16",
+          "param_size": 2,
+          "param_units": null,
+          "access": "ro",
+          "range": {
+            "min":-1,
+            "max": 65535,
+            "scale": 1
+          }
+        },
+        {
+          "cid": "battery_soc",
+          "param_key": null,
+          "mb_reg_start": 37007,
+          "mb_size": 1,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "u16",
+          "param_size": 2,
+          "param_units": "%",
+          "access": "ro",
+          "range": {
+            "min":-1,
+            "max": 65535,
+            "scale": 1
+          }
+        }
+      ]
+    },
+    "energy_accumulation": {
+      "function_code": 4,
+      "writable": false,
+      "cids": [
+        {
+          "cid": "pv_energy_today",
+          "param_key": null,
+          "mb_reg_start": 35193,
+          "mb_size": 2,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "u32",
+          "param_size": 4,
+          "param_units": "kWh",
+          "access": "ro",
+          "range": {
+            "min":-1,
+            "max": 4294967295, 
+            "scale": 0.1
+          }
+        },
+        {
+          "cid": "energy_sell_total",
+          "param_key": null,
+          "mb_reg_start": 45226,
+          "mb_size": 2,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "u32",
+          "param_size": 4,
+          "param_units": "kWh",
+          "access": "rw",
+          "range": {
+            "min":-1,
+            "max": 4294967295, 
+            "scale": 0.1
+          }
+        },
+        {
+          "cid": "energy_sell_today",
+          "param_key": null,
+          "mb_reg_start": 35199,
+          "mb_size": 1,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "u16",
+          "param_size": 2,
+          "param_units": "kWh",
+          "access": "ro",
+          "range": {
+            "min":-1,
+            "max": 65535,
+            "scale": 0.1
+          }
+        },
+        {
+          "cid": "energy_charge_today",
+          "param_key": null,
+          "mb_reg_start": 35208,
+          "mb_size": 1,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "u16",
+          "param_size": 2,
+          "param_units": "kWh",
+          "access": "ro",
+          "range": {
+            "min":-1,
+            "max": 65535,
+            "scale": 0.1
+          }
+        },
+        {
+          "cid": "energy_discharge_today",
+          "param_key": null,
+          "mb_reg_start": 35211,
+          "mb_size": 1,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "u16",
+          "param_size": 2,
+          "param_units": "kWh",
+          "access": "ro",
+          "range": {
+            "min":-1,
+            "max": 65535,
+            "scale": 0.1
+          }
+        }
+      ]
+    },
+    "energy_consumption": {
+      "function_code": 3,
+      "writable": true,
+      "cids": [
+        {
+          "cid": "energy_load_total",
+          "param_key": null,
+          "mb_reg_start": 45234,
+          "mb_size": 2,
+          "mb_param_type": "HOLDING",
+          "param_offset": 0,
+          "param_type": "u32",
+          "param_size": 4,
+          "param_units": "kWh",
+          "access": "rw",
+          "range": {
+            "min":-1,
+            "max": 4294967295, 
+            "scale": 0.1
+          }
+        },
+        {
+          "cid": "energy_load_today",
+          "param_key": null,
+          "mb_reg_start": 45236,
+          "mb_size": 1,
+          "mb_param_type": "HOLDING",
+          "param_offset": 0,
+          "param_type": "u16",
+          "param_size": 2,
+          "param_units": "kWh",
+          "access": "rw",
+          "range": {
+            "min":-1,
+            "max": 65535,
+            "scale": 0.1
+          }
+        }
+      ]
+    },
+    "time_data": {
+      "function_code": 4,
+      "writable": false,
+      "cids": [
+        {
+          "cid": "rtc_year_month_ro",
+          "param_key": null,
+          "mb_reg_start": 35100,
+          "mb_size": 1,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "u16",
+          "param_size": 2,
+          "param_units": null,
+          "access": "ro",
+          "range": {
+            "min":-1,
+            "max": 65535,
+            "scale": 1
+          }
+        },
+        {
+          "cid": "rtc_day_hour_ro",
+          "param_key": null,
+          "mb_reg_start": 35101,
+          "mb_size": 1,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "u16",
+          "param_size": 2,
+          "param_units": null,
+          "access": "ro",
+          "range": {
+            "min":-1,
+            "max": 65535,
+            "scale": 1
+          }
+        },
+        {
+          "cid": "rtc_minute_second_ro",
+          "param_key": null,
+          "mb_reg_start": 35102,
+          "mb_size": 1,
+          "mb_param_type": "INPUT",
+          "param_offset": 0,
+          "param_type": "u16",
+          "param_size": 2,
+          "param_units": null,
+          "access": "ro",
+          "range": {
+            "min":-1,
+            "max": 65535,
+            "scale": 1
+          }
+        }
+      ]
+    }
+  },
+  "enums": {
+    "work_modes": {
+      "values": {
+        "0": "Wait",
+        "1": "On-Grid",
+        "2": "Off-grid",
+        "3": "Fault",
+        "4": "Flash",
+        "5": "Check"
+      }
+    },
+    "battery_modes": {
+      "values": {
+        "0": "No Battery, or battery disconnected",
+        "1": "Standby, no discharging or charging",
+        "2": "Discharging",
+        "3": "Charging"
+      }
+    },
+    "error_codes": {
+      "values": {
+        "0": "The GFCI detecting circuit is abnormal",
+        "1": "The output current sensor is abnormal",
+        "2": "Not assigned",
+        "3": "Different DCI value on Master and Slave",
+        "4": "Different GFCI values on Master and Slave",
+        "5": "Not assigned",
+        "6": "GFCI check failure 3 times",
+        "7": "Relay check failure 3 times",
+        "8": "AC HCT check failure 3 times",
+        "9": "Utility is unavailable",
+        "10": "Ground current is too high",
+        "11": "DC bus is too high",
+        "12": "The fan in case failure",
+        "13": "Temperature is too high",
+        "14": "Utility Phase Failure",
+        "15": "PV input voltage is over the tolerable maximum value",
+        "16": "The external fan failure",
+        "17": "Grid voltage out of tolerable range",
+        "18": "Isolation resistance of PV-plant too low",
+        "19": "The DC injection to grid is too high",
+        "20": "Backup output overload",
+        "21": "Not assigned",
+        "22": "Different value between Master and Slave for grid frequency",
+        "23": "Different value between Master and Slave for grid voltage",
+        "24": "Not assigned",
+        "25": "Relay check is failure",
+        "26": "Not assigned",
+        "27": "Phase angle out of range (110°–140°)",
+        "28": "Communication between ARM and DSP is failure",
+        "29": "The grid frequency is out of tolerable range",
+        "30": "EEPROM cannot be read or written",
+        "31": "Communication between microcontrollers is failure"
+      }
+    },
+    "grid_modes": {
+      "values": {
+        "0": "Loss, inverter disconnects to Grid",
+        "1": "OK, inverter connects to Grid",
+        "2": "Fault, something is wrong"
+      }
+    }
+  }
+}
